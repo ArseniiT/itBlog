@@ -1,8 +1,11 @@
+<?php
+  require './includes/config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IT Blog</title>
+  <title><?php echo $config['title']; ?></title>
 
   <!-- Bootstrap Grid -->
   <link rel="stylesheet" type="text/css" href="./media/assets/bootstrap-grid-only/css/grid12.css">
@@ -17,38 +20,7 @@
 
   <div id="wrapper">
 
-    <header id="header">
-      <div class="header__top">
-        <div class="container">
-          <div class="header__top__logo">
-            <h1>IT Blog</h1>
-          </div>
-          <nav class="header__top__menu">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About me</a></li>
-              <li><a href="#">I'm in facebook</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-      <div class="header__bottom">
-        <div class="container">
-          <nav>
-            <ul>
-              <li><a href="#">Security</a></li>
-              <li><a href="#">Programming</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Music</a></li>
-              <li><a href="#">Personal development</a></li>
-              <li><a href="#">Guides</a></li>
-              <li><a href="#">Reviews</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
+    <? include './includes/header.php'; ?>
 
     <div id="content">
       <div class="container">
@@ -60,16 +32,37 @@
               <div class="block__content">
                 <div class="articles articles__horizontal">
 
-                  <article class="article">
-                    <div class="article__image" style="background-image: url(./media/images/post-image.jpg);"></div>
-                    <div class="article__info">
-                      <a href="#">Article name</a>
-                      <div class="article__info__meta">
-                        <small>Category: <a href="#">Programming</a></small>
-                      </div>
-                      <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
-                    </div>
-                  </article>
+                  <?  
+                    $articles = mysqli_query($connection, "SELECT * FROM articles");
+                  ?>
+                    
+                  <?
+                  while ($art = mysqli_fetch_assoc($articles)) {
+                    ?> 
+                      <article class="article">
+                        
+                        <div class="article__image" style="background-image: url(./static/images/<? echo $art['image']; ?>);"></div>
+                        <div class="article__info">
+                          <a href="./article.php?id=<? echo $art['id']; ?>"><? $art['title']; ?></a>
+                          <div class="article__info__meta">
+                            <? 
+                              $art_cat = false;
+                              foreach ($categories as $cat) {
+                                if( $cat['id'] == $art['categories_id'] ) {
+                                  $art_cat = $cat;
+                                  break;
+                                }
+                              }
+                            ?>
+                            <small>Category: <a href="/categorie.php?id=<? echo $art_cat['id']; ?>"><? echo $art_cat['title']; ?></a></small>
+                          </div>
+                          <div class="article__info__preview"><? echo mb_substr($art['text'], 0, 50, 'utf-8') ?></div>
+                        </div>
+                      </article>
+                    <?
+                  }
+                  ?>
+                  
 
                   <article class="article">
                     <div class="article__image"></div>
@@ -359,7 +352,7 @@
     <footer id="footer">
       <div class="container">
         <div class="footer__logo">
-          <h1>IT Blog</h1>
+          <h1><?php echo $config['title']; ?></h1>
         </div>
         <nav class="footer__menu">
           <ul>
