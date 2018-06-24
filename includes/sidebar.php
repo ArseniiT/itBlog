@@ -10,60 +10,32 @@
   <div class="block__content">
     <div class="articles articles__vertical">
 
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
+      <?  
+      $articles = mysqli_query($connection, "SELECT * FROM articles ORDER BY `views` LIMIT 5");                  
+      while ($art = mysqli_fetch_assoc($articles)) {
+      ?> 
+      <article class="article">                        
+        <div class="article__image" style="background-image: url(./static/images/<? echo $art['image']; ?>);"></div>
         <div class="article__info">
-          <a href="#">Article name</a>
+          <a href="./article.php?id=<? echo $art['id']; ?>"><? echo $art['title']; ?></a>
           <div class="article__info__meta">
-            <small>Category: <a href="#">Programming</a></small>
+            <? 
+              $art_cat = false;
+              foreach ($categories as $cat) {
+                if( $cat['id'] == $art['categories_id'] ) {
+                  $art_cat = $cat;
+                  break;
+                }
+              }
+            ?>
+            <small>Category: <a href="/articles.php?categorie=<? echo $art_cat['id']; ?>"><? echo $art_cat['title']; ?></a></small>
           </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
+          <div class="article__info__preview"><? echo mb_substr(strip_tags($art['text']), 0, 100, 'utf-8') . ' ...' ?></div>
         </div>
       </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Article name</a>
-          <div class="article__info__meta">
-            <small>Category: <a href="#">Programming</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
-        </div>
-      </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Article name</a>
-          <div class="article__info__meta">
-            <small>Category: <a href="#">Programming</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
-        </div>
-      </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Article name</a>
-          <div class="article__info__meta">
-            <small>Category: <a href="#">Programming</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
-        </div>
-      </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Article name</a>
-          <div class="article__info__meta">
-            <small>Category: <a href="#">Programming</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
-        </div>
-      </article>
+    <?
+    }
+    ?>     
 
     </div>
   </div>
@@ -73,61 +45,23 @@
   <h3>Comments</h3>
   <div class="block__content">
     <div class="articles articles__vertical">
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
+    <?  
+      $comments = mysqli_query($connection, "SELECT * FROM comments ORDER BY `id` LIMIT 5");                  
+      while ($comment = mysqli_fetch_assoc($comments)) {
+    ?> 
+      <article class="article">                        
+        <div class="article__image" style="background-image: url(https://www.gravatar.com/avatar/<? 
+        echo md5($comment['email']); ?>?s=125);"></div>
         <div class="article__info">
-          <a href="#">Jonny Flame</a>
-          <div class="article__info__meta">
-            <small><a href="#">Article name #1</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur hic deleniti alias id eos ratione...</div>
+          <a href="./article.php?id=<? echo $comment['articles_id']; ?>"><? echo $comment['author']; ?></a>         
+          <div class="article__info__meta"></div> 
+          <div class="article__info__preview"><? echo mb_substr(strip_tags($comment['text']), 0, 100, 'utf-8') . ' ...' ?></div>
         </div>
       </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Jonny Flame</a>
-          <div class="article__info__meta">
-            <small><a href="#">Article name #1</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur hic deleniti alias id eos ratione...</div>
-        </div>
-      </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Jonny Flame</a>
-          <div class="article__info__meta">
-            <small><a href="#">Article name #1</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur hic deleniti alias id eos ratione...</div>
-        </div>
-      </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Jonny Flame</a>
-          <div class="article__info__meta">
-            <small><a href="#">Article name #1</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur hic deleniti alias id eos ratione...</div>
-        </div>
-      </article>
-
-      <article class="article">
-        <div class="article__image" style="background-image: url(/media/images/post-image.jpg);"></div>
-        <div class="article__info">
-          <a href="#">Jonny Flame</a>
-          <div class="article__info__meta">
-            <small><a href="#">Article name #1</a></small>
-          </div>
-          <div class="article__info__preview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur hic deleniti alias id eos ratione...</div>
-        </div>
-      </article>
+    <?
+    }
+    ?>
+    
 
     </div>
   </div>

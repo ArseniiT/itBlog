@@ -59,21 +59,7 @@
       </div>
     </div>
 
-    <footer id="footer">
-      <div class="container">
-        <div class="footer__logo">
-          <h1>IT Blog</h1>
-        </div>
-        <nav class="footer__menu">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About me</a></li>
-            <li><a href="#">My facebook</a></li>
-            <li><a href="#">Copyrights</a></li>
-          </ul>
-        </nav>
-      </div>
-    </footer>
+    <? include '../includes/footer.php' ?>
 
   </div>
 
