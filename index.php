@@ -32,7 +32,7 @@
               <div class="block__content">
                 <div class="articles articles__horizontal">
                   <?  
-                    $articles = mysqli_query($connection, "SELECT * FROM articles ORDER BY `id` LIMIT 10");                  
+                    $articles = mysqli_query($connection, "SELECT * FROM articles ORDER BY `id` DESC LIMIT 10");                  
                     while ($art = mysqli_fetch_assoc($articles)) {
                   ?> 
                       <article class="article">                        
@@ -68,7 +68,7 @@
               <div class="block__content">
                 <div class="articles articles__horizontal">
                   <?  
-                    $articles = mysqli_query($connection, "SELECT * FROM articles  WHERE `categorie_id` = 6 ORDER BY `id` LIMIT 10");                  
+                    $articles = mysqli_query($connection, "SELECT * FROM articles  WHERE `categories_id` = 2 ORDER BY `id` LIMIT 10");                  
                     while ($art = mysqli_fetch_assoc($articles)) {
                   ?> 
                       <article class="article">                        
@@ -104,7 +104,7 @@
                 <div class="articles articles__horizontal">
 
                   <?  
-                    $articles = mysqli_query($connection, "SELECT * FROM articles  WHERE `categorie_id` = 1 ORDER BY `id` LIMIT 10");                  
+                    $articles = mysqli_query($connection, "SELECT * FROM articles  WHERE `categories_id` = 1 ORDER BY `id` LIMIT 10");                  
                     while ($art = mysqli_fetch_assoc($articles)) {
                   ?> 
                       <article class="article">                        

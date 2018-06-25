@@ -11,7 +11,7 @@
     <div class="articles articles__vertical">
 
       <?  
-      $articles = mysqli_query($connection, "SELECT * FROM articles ORDER BY `views` LIMIT 5");                  
+      $articles = mysqli_query($connection, "SELECT * FROM articles ORDER BY `views` DESC LIMIT 5");                  
       while ($art = mysqli_fetch_assoc($articles)) {
       ?> 
       <article class="article">                        
