@@ -92,7 +92,7 @@ body {
             border-bottom: 2px solid #333; }
   #header .header__bottom {
     height: 50px;
-    background-color: black;
+    background-color: #1c7ba0;
     line-height: 50px; }
     #header .header__bottom nav ul > li {
       display: inline-block;

@@ -1,5 +1,4 @@
 <?php
-
 $config = array(
   'title' => 'IT Blog',
   'fb_url' => 'https://www.facebook.com/arsenii.tolmachev',
@@ -10,5 +9,4 @@ $config = array(
     'name' => 'it_blog'  
   )
 );
-
 require 'db.php';

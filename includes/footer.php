@@ -6,8 +6,8 @@
     <nav class="footer__menu">
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/pages/about_me.php">About me</a></li>
-        <li><a href=" <? echo $config['fb_url'] ?> ">My facebook</a></li>
+        <li><a href="/pages/about.php">About</a></li>
+        <li><a href=" <?php echo $config['fb_url'] ?> ">My facebook</a></li>
         <li><a href="/pages/copyright.php">Copyrights</a></li>
       </ul>
     </nav>
